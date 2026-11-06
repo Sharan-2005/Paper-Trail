@@ -93,6 +93,160 @@ papertrail/
 - Node.js 18 or higher + npm
 - (Optional) [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki) for scanned image text extraction. Standard text PDFs process without it.
 
+# Setup and Installation
+
+PaperTrail can be installed and run locally using Python, Node.js and open-source document-processing tools.
+
+## 1. Prerequisites
+
+Install the following software before setting up the project:
+
+| Software | Minimum Requirement | Purpose |
+|---|---|---|
+| Python | 3.10+ | Backend development and processing |
+| Node.js | 18+ | Frontend runtime |
+| npm | Included with Node.js | Frontend package management |
+| Git | Latest version | Clone the project repository |
+| Tesseract OCR | Optional | OCR for scanned documents and images |
+
+**Tesseract OCR:** [Download for Windows](https://github.com/UB-Mannheim/tesseract/wiki)
+
+Standard text-based PDFs can be processed without Tesseract OCR.
+
+## 2. Clone the Repository
+
+Open Command Prompt or PowerShell and execute:
+
+```bash
+git clone https://github.com/Sharan-2005/Paper-Trail.git
+cd Paper-Trail
+```
+
+This downloads the PaperTrail source code to your local system.
+
+## 3. Backend Setup
+
+Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+Create a Python virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate the environment on Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Install the backend dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## 4. Environment Configuration
+
+Create a `.env` file inside the `backend` directory.
+
+Configure the application using the required environment variables:
+
+```env
+
+BACKEND_HOST=0.0.0.0
+BACKEND_PORT=8000
+
+UPLOAD_DIR=uploads
+REPORTS_DIR=generated_reports
+
+TESSERACT_CMD=C:/Program Files/Tesseract-OCR/tesseract.exe
+
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+
+DATABASE_URL=sqlite:///./papertrail.db
+MAX_FILE_SIZE_MB=50
+```
+
+**Note:**
+- The Gemini API key is optional. PaperTrail supports a local rule-based fallback.
+- Update the Tesseract executable path if it is installed in a different location.
+- Keep API keys private and never upload the `.env` file to a public GitHub repository.
+
+## 5. Frontend Setup
+
+Open a new terminal and navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+Install the required Node.js dependencies:
+
+```bash
+npm install
+```
+
+This installs the packages specified in `package.json`.
+
+## 6. Launching PaperTrail
+
+**Option A – One-click startup (Windows)**
+
+From the main project directory, run:
+
+```bash
+start_all.bat
+```
+
+This launches the backend and frontend services using the project's startup script.
+
+**Option B – Manual startup**
+
+Start the backend:
+
+```bash
+cd backend
+venv\Scripts\activate
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Start the frontend in another terminal:
+
+```bash
+cd frontend
+npm run dev
+```
+
+## 7. Access the Application
+
+Once both services are running, open the following URLs in your browser:
+
+| Service | URL |
+|---|---|
+| PaperTrail Web Application | http://localhost:5173 |
+| Backend API | http://localhost:8000 |
+| Interactive API Documentation | http://localhost:8000/docs |
+| Backend Health Check | http://localhost:8000/api/health |
+
+## 8. Start a Demonstration Investigation
+
+1. Open the PaperTrail web application.
+2. Select the built-in Demo Mode or launch the sample investigation.
+3. Explore the preloaded fictional documents.
+4. Review extracted information and cross-document inconsistencies.
+5. Inspect the relationship graph and visual forensic indicators.
+6. View the risk assessment and key findings.
+7. Generate and download the investigation PDF dossier.
+
+**Setup Complete!**
+
+PaperTrail is now ready to run locally. The application can process uploaded documents and present investigation findings through its web-based interface.
+
 ## API Summary
 
 | Method | Endpoint | Description |
